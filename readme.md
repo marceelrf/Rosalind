@@ -4,14 +4,15 @@ Este repositório contém soluções para os problemas do site [Rosalind](http:/
 
 ## Estrutura do Repositório
 
-├── Datasets/
-│ ├── dataset1.txt
-│ ├── dataset2.txt
-│ └── ...
-├── solution1.py
-├── solution2.py
-├── ...
-└── README.md
+Rosalind-Solutions/  
+├── Datasets/  
+│ ├── dataset1.txt  
+│ ├── dataset2.txt  
+│ └── ...  
+├── solution1.py  
+├── solution2.py  
+├── ...  
+└── README.md  
 
 
 - `Datasets/`: Pasta contendo os arquivos de dados usados nas soluções dos problemas.
