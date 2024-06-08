@@ -78,8 +78,24 @@ def find_orfs(dna):
                         orfs.add(protein)
     return orfs
 
-seq[0]
-ORFs = find_orfs(seq[0])
+def find_motif_positions(sequence, motif):
+    positions = []
+    motif_length = len(motif)
+    for i in range(len(sequence) - motif_length + 1):
+        if sequence[i:i + motif_length] == motif:
+            positions.append(i)
+    return positions
 
-for seq in ORFs:
-    print(f"{seq}")
+print(codon_dict.get("AGC"))
+print(codon_dict.items())
+# seq[0]
+# ORFs = find_orfs(seq[0])
+
+# for seq in ORFs:
+#     print(f"{seq}")
+
+
+while i < len(seq):
+    
+    if seq[i:i+3] == "AUG":
+        
