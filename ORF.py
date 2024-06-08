@@ -93,7 +93,7 @@ print(codon_dict.items())
 
 # for seq in ORFs:
 #     print(f"{seq}")
-
+codon_dict.setdefault("AUG")
 
 while i < len(seq):
     
