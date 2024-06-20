@@ -9,19 +9,20 @@ def reverse_complement(dna):
 #     record = SeqIO.parse(sequence, "fasta")
 #     return record.seq
 
-record = next(SeqIO.parse('Datasets/rosalind_revp (1).txt', "fasta"))
+
+record = next(SeqIO.parse('Datasets/rosalind_revp (2).txt', "fasta"))
 
 sequence = str(record.seq)
 sequence
 # seq1 = "ATGCAT"
 # revc = reverse_complement(seq1)
 # revc
-# sequence = "TCAATGCATGCGGGTCTATATGCAT"
+sequence = "TCAATGCATGCGGGTCTATATGCAT"
 
 result = []
 for bases in range(4,13):
     
-    for i in range(0,len(sequence)-bases):
+    for i in range(0,len(sequence)-bases+1):
         
         seq1 = sequence[i:i+bases]
         
@@ -46,3 +47,10 @@ with open(output_file, "w") as file:
     for item in result:
         # Write each item to the file on a new line
         file.write(f"{item}\n")
+        
+        
+        
+# for bases in range(4,13):
+    
+#     for i in range(0,len(sequence)-bases):
+#         print(f"i:{i}, bases:{bases}, final:{i+bases}")
