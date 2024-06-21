@@ -2,7 +2,7 @@ from Bio import SeqIO
 import numpy as np
 
 
-records = list(SeqIO.parse("Datasets/rosalind_cons.txt", "fasta"))
+records = list(SeqIO.parse("Datasets/rosalind_cons (1).txt", "fasta"))
 
 len(records)
 
@@ -48,10 +48,10 @@ max_array_names_string = ''.join(max_array_names)
 max_array_names_string
 
 
-A_count
-T_count
-C_count
-G_count
+A_count = A_count.astype(np.int64)
+T_count = T_count.astype(np.int64)
+C_count = C_count.astype(np.int64)
+G_count = G_count.astype(np.int64)
 
 A_count_str = ' '.join(map(str, A_count.tolist()))
 C_count_str = ' '.join(map(str, C_count.tolist()))
@@ -59,7 +59,7 @@ G_count_str = ' '.join(map(str, G_count.tolist()))
 T_count_str = ' '.join(map(str, T_count.tolist()))
 
 output_string = f"{max_array_names_string}\nA: {A_count_str}\nC: {C_count_str}\nG: {G_count_str}\nT: {T_count_str}"
-
+print(output_string)
 # Save the output to a text file
 with open("Output/CONS.txt", "w") as file:
     file.write(output_string)
