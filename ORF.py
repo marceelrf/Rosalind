@@ -98,7 +98,7 @@ print(codon_dict.items())
 #     print(f"{seq}")
 codon_dict.setdefault("AUG")
 
-while i < len(seq):
+# while i < len(seq):
     
-    if seq[i:i+3] == "AUG":
+#     if seq[i:i+3] == "AUG":
         
