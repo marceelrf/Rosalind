@@ -21,6 +21,28 @@ def import_multi_fasta(file_path):
         print(f"An error occurred while reading the file: {e}")
     return (sequences)
 
-seq = import_multi_fasta("Datasets/test_GRPH.txt")
+seq = import_multi_fasta("/home/marceelrf/Projs/Rosalind/Datasets/rosalind_grph.txt")
+seq
+# str(seq[0].seq)[-3:]
+# str(seq[0].seq)[0:3]
 
-str(seq[0].seq)
+res = []
+for i in range(len(seq)):
+    print(i)
+    
+    s1 = seq[i]
+    
+    for j in range(len(seq)):
+        if i != j:
+            
+            s2 = seq[j]
+            if str(s1.seq)[-3:] == str(s2.seq)[0:3]:
+                
+                res.append(f"{s1.id} {s2.id}")
+                
+res
+
+with open("Output/GRPH.txt", 'w') as arquivo:
+    for line in res:
+
+        arquivo.write(f"{line}\n")

@@ -38,9 +38,12 @@ codon_dict = {
 }
 
 
-seq = read_fasta('Datasets/rosalind_orf (3).txt')
+# seq = read_fasta('Datasets/rosalind_orf (3).txt')
+
+seq = "AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG"
 seq
-#seq = "AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG"
+
+
 
 def transcribe(dna):
     """Transcribes DNA to RNA by replacing all 'T's with 'U's."""
