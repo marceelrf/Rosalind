@@ -29,14 +29,14 @@ import requests
 
 
 # Read the file content
-with open("Datasets/rosalind_mprt (2).txt", "r") as file:
+with open("Datasets/rosalind_mprt (3).txt", "r") as file:
     content = file.read()
 
 # Split the content into lines
 UNIPROT_ACC = content.splitlines()
 
 # Open the output file for writing
-with open("output.txt", "w") as output_file:
+with open("output1.txt", "w") as output_file:
     for code in UNIPROT_ACC:
         print("<----------------------------------->")
         print(code)
@@ -60,7 +60,7 @@ with open("output.txt", "w") as output_file:
             sequence = ''.join(line.strip() for line in lines if not line.startswith('>'))
 
             # Find the motif
-            motif = re.compile(r'N[^P][ST][^P]')
+            motif = re.compile(r"(?=(N[^P][ST][^P]))")
             matches = motif.finditer(sequence)
 
             pos = []
