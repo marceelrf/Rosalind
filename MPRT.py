@@ -36,7 +36,7 @@ with open("Datasets/rosalind_mprt (3).txt", "r") as file:
 UNIPROT_ACC = content.splitlines()
 
 # Open the output file for writing
-with open("output1.txt", "w") as output_file:
+with open("Output/output1.txt", "w") as output_file:
     for code in UNIPROT_ACC:
         print("<----------------------------------->")
         print(code)
