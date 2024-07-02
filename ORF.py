@@ -67,38 +67,80 @@ def translate(rna):
     return ''.join(protein)
 
 
-def find_orfs(dna):
-    """Finds all distinct ORFs in the given DNA sequence and its reverse complement."""
-    orfs = set()
-    sequences = [dna, reverse_complement(dna)]
-    for seq in sequences:
-        rna = transcribe(seq)
-        for frame in range(3):
-            for i in range(frame, len(rna) - 2, 3):
-                if rna[i:i+3] == 'AUG':
-                    protein = translate(rna[i:])
-                    if protein:
-                        orfs.add(protein)
-    return orfs
+# def find_orfs(dna):
+#     """Finds all distinct ORFs in the given DNA sequence and its reverse complement."""
+#     orfs = set()
+#     sequences = [dna, reverse_complement(dna)]
+#     for seq in sequences:
+#         rna = transcribe(seq)
+#         for frame in range(3):
+#             for i in range(frame, len(rna) - 2, 3):
+#                 if rna[i:i+3] == 'AUG':
+#                     protein = translate(rna[i:])
+#                     if protein:
+#                         orfs.add(protein)
+#     return orfs
 
-def find_motif_positions(sequence, motif):
-    positions = []
-    motif_length = len(motif)
-    for i in range(len(sequence) - motif_length + 1):
-        if sequence[i:i + motif_length] == motif:
-            positions.append(i)
-    return positions
 
-print(codon_dict.get("AGC"))
-print(codon_dict.items())
-# seq[0]
-# ORFs = find_orfs(seq[0])
+def find_orfs(dna, codon_dict):
+    def transcribe(dna):
+        """Transcribes DNA to RNA by replacing all 'T's with 'U's."""
+        return dna.replace('T', 'U')
 
-# for seq in ORFs:
-#     print(f"{seq}")
-codon_dict.setdefault("AUG")
+    def reverse_complement(dna):
+        """Returns the reverse complement of a DNA sequence."""
+        complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+        return ''.join(complement[base] for base in reversed(dna))
 
-# while i < len(seq):
+    def translate(rna):
+        """Translates RNA sequence into a protein sequence."""
+        protein = []
+        for i in range(0, len(rna) - 2, 3):
+            codon = rna[i:i+3]
+            amino_acid = codon_dict.get(codon)
+            if amino_acid == 'Stop':
+                break
+            if amino_acid:
+                protein.append(amino_acid)
+        return ''.join(protein)
     
-#     if seq[i:i+3] == "AUG":
+    def get_frames(dna):
+        """Generates all six reading frames of the given DNA sequence."""
+        frames = []
+        # Forward frames
+        for i in range(3):
+            frames.append(dna[i:])
+        # Reverse frames
+        rev_comp = reverse_complement(dna)
+        for i in range(3):
+            frames.append(rev_comp[i:])
+        return frames
+    
+    def find_orfs_in_frame(frame):
+        """Finds ORFs in a single frame."""
+        orfs = []
+        rna = transcribe(frame)
+        protein = translate(rna)
+        start_index = 0
         
+        while start_index < len(protein):
+            start_index = protein.find('M', start_index)
+            if start_index == -1:
+                break
+            end_index = protein.find('*', start_index)
+            if end_index == -1:
+                break
+            orfs.append(protein[start_index:end_index])
+            start_index = end_index + 1
+        
+        return orfs
+    
+    frames = get_frames(dna)
+    all_orfs = []
+    
+    for frame in frames:
+        all_orfs.extend(find_orfs_in_frame(frame))
+    
+    return all_orfs
+
+find_orfs(seq, codon_dict)
